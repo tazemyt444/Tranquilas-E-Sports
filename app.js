@@ -87,3 +87,23 @@ else if(hour < 18){
 else{
     console.log("Good Evening Skull Blaze");
 }
+fetch("players.json")
+  .then(res => res.json())
+  .then(players => {
+
+    players.sort((a, b) => b.points - a.points);
+
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+
+    players.forEach((player, index) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>#${index + 1}</td>
+          <td>${player.name}</td>
+          <td>${player.points}</td>
+        </tr>
+      `;
+    });
+
+  });
